@@ -71,7 +71,7 @@ class ReconnectingWebsocket:
                     keep_waiting = False
                     await self._reconnect()
         except Exception as e:
-            logging.info(f"websocket error: {e}")
+            logging.exception("websocket error")
 
     def _on_connect(self, socket):
         self._socket = socket
