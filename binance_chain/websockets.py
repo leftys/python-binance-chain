@@ -65,12 +65,12 @@ class ReconnectingWebsocket:
                 except ws.ConnectionClosed as e:
                     self._log.debug('conn closed:{}'.format(e))
                     keep_waiting = False
-                    await self._reconnect()
+                    asyncio.ensure_future(self._reconnect())
                 except Exception as e:
                     self._log.debug('ws exception:{}'.format(e))
                     keep_waiting = False
-                    await self._reconnect()
-        except Exception as e:
+                    asyncio.ensure_future(self._reconnect())
+        except Exception:
             logging.exception("websocket error")
 
     def _on_connect(self, socket):
